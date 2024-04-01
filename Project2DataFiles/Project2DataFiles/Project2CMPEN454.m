@@ -9,16 +9,23 @@ ParamTwoObject = matfile('Parameters_V2.mat');
 positionOne = getfield(ParamOneObject.Parameters(1,1),'position');
 rotationOne = getfield(ParamOneObject.Parameters(1,1),'Rmat');
 KmatrixOne = getfield(ParamOneObject.Parameters(1,1),'Kmat');
+SMatrixOne = [1 0 0 -positionOne(1);0 1 0 -positionOne(2); 0 0 1 -positionOne(3); 0 0 0 1];
+RMatrixOne = [rotationOne(1,1) rotationOne(1,2) rotationOne(1,3) 0;rotationOne(2,1) rotationOne(2,2) rotationOne(2,3) 0;rotationOne(3,1) rotationOne(3,2) rotationOne(3,3) 0;0 0 0 1];
+JoinedMatrixOne = RMatrixOne * SMatrixOne;
+TVectorOne = JoinedMatrixOne(1:3,4);
+
 
 positionTwo = getfield(ParamTwoObject.Parameters(1,1),'position');
 rotationTwo = getfield(ParamTwoObject.Parameters(1,1),'Rmat');
 KmatrixTwo = getfield(ParamTwoObject.Parameters(1,1),'Kmat');
+SMatrixTwo = [1 0 0 -positionTwo(1);0 1 0 -positionTwo(2); 0 0 1 -positionTwo(3); 0 0 0 1];
+RMatrixTwo = [rotationTwo(1,1) rotationTwo(1,2) rotationTwo(1,3) 0;rotationTwo(2,1) rotationTwo(2,2) rotationTwo(2,3) 0;rotationTwo(3,1) rotationTwo(3,2) rotationTwo(3,3) 0;0 0 0 1];
+JoinedMatrixTwo = RMatrixTwo * SMatrixTwo;
+TVectorTwo = JoinedMatrixTwo(1:3,4);
 
-positionOne = transpose(positionOne);
-positionTwo = transpose(positionTwo);
 
-COne = -transpose(rotationOne)*positionOne;
-CTwo = -transpose(rotationTwo)*positionTwo;
+COne = -transpose(rotationOne)*TVectorOne;
+CTwo = -transpose(rotationTwo)*TVectorTwo;
 
 %Reading in mocap data
 mocapData = matfile('mocapPoints3D.mat');
@@ -76,6 +83,8 @@ for j=1:N
 
 end
 MSE = summation/N;
+
+
 %imshow(imOne);
 %axis on;
 %hold on;
