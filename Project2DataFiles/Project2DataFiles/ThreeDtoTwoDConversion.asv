@@ -44,7 +44,7 @@ mocapPosition = mocapData.pts3D;
 CamOneCoord = zeros(2,N);
 CamTwoCoord = zeros(2,N);
 
-%Converting to pixel Coords
+%Converting to pixel 
 for i=1:N 
     U = mocapPosition(1,i);
     V = mocapPosition(2,i);
