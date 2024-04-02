@@ -1,0 +1,73 @@
+
+
+%Equation of floor through 3 points
+imOne = imread("im1corrected.jpg");
+imTwo = imread("im2corrected.jpg");
+[xi1, yi1, PFloorPlaneOne] = impixel(imOne);
+[xi2, yi2, PFloorPlaneTwo] = impixel(imTwo);
+
+
+CamOneCoords = [transpose(xi1);transpose(yi1)];
+CamTwoCoords = [transpose(xi2);transpose(yi2)];
+
+
+[NewWorldCoords] = task3_2(CamOneCoords,CamTwoCoords);
+A = NewWorldCoords(:,1);
+B = NewWorldCoords(:,2);
+C = NewWorldCoords(:,3);
+
+%Calculate plane
+normal = cross(A-B, A-C);
+syms x y z;
+var = [x,y,z];
+planefunction = dot(normal,var-A)
+%% 
+
+
+%Wall Plane
+[xi1, yi1, PFloorPlaneOne] = impixel(imOne);
+[xi2, yi2, PFloorPlaneTwo] = impixel(imTwo);
+
+CamOneCoords = [transpose(xi1);transpose(yi1)];
+CamTwoCoords = [transpose(xi2);transpose(yi2)];
+
+
+[NewWorldCoords] = task3_2(CamOneCoords,CamTwoCoords);
+A = NewWorldCoords(:,1);
+B = NewWorldCoords(:,2);
+C = NewWorldCoords(:,3);
+
+%Calculate plane
+normal = cross(A-B, A-C);
+syms x y z;
+var = [x,y,z];
+planefunction = dot(normal,var-transpose(A))
+%% 
+
+%Doorway height
+CamOneCoords = [transpose(xi1);transpose(yi1)];
+CamTwoCoords = [transpose(xi2);transpose(yi2)];
+
+
+[NewWorldCoords] = task3_2(CamOneCoords,CamTwoCoords);
+
+DoorHeight = sqrt(sum((NewWorldCoords(:,2)-NewWorldCoords(:,1)).^2))
+%% 
+
+%Person Height
+CamOneCoords = [transpose(xi1);transpose(yi1)];
+CamTwoCoords = [transpose(xi2);transpose(yi2)];
+
+
+[NewWorldCoords] = task3_2(CamOneCoords,CamTwoCoords);
+
+PersonHeight = sqrt(sum((NewWorldCoords(:,2)-NewWorldCoords(:,1)).^2))
+%% 
+
+%Camera Location
+CamOneCoords = [transpose(xi1);transpose(yi1)];
+CamTwoCoords = [transpose(xi2);transpose(yi2)];
+
+
+[NewWorldCoords] = task3_2(CamOneCoords,CamTwoCoords);
+NewWorldCoords

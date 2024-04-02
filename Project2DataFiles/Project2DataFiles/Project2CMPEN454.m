@@ -1,6 +1,6 @@
 
 
-[CamOneCoord, CamTwoCoord] = ThreeDtoTwoDConversion('Parameters_V1.mat','Parameters_V2.mat');
+[CamOneCoord, CamTwoCoord] = task3_1('Parameters_V1.mat','Parameters_V2.mat');
 
 % Gathering parameters for cameras one and two
 ParamOneObject = matfile('Parameters_V1.mat');
@@ -48,7 +48,8 @@ for i=1:N
 
     VTwoMag = sqrt(sum(VTwo'.^2));
     VTwoUnit = VTwo/VTwoMag;
-
+    
+    %Assigns camera center
     CamOneVectors(1,i,:) = COne;
     CamOneVectors(2,i,:) = VOneUnit;
 

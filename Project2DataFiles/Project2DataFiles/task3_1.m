@@ -1,4 +1,4 @@
-function [CamOneCoord, CamTwoCoord] = ThreeDtoTwoDConversion(paramOne,paramTwo)
+function [CamOneCoord, CamTwoCoord] = task3_1(paramOne,paramTwo)
 
 %%% Working 3.1 Function
 
@@ -44,7 +44,7 @@ mocapPosition = mocapData.pts3D;
 CamOneCoord = zeros(2,N);
 CamTwoCoord = zeros(2,N);
 
-%Converting to pixel 
+%Converting to pixel Coords
 for i=1:N 
     U = mocapPosition(1,i);
     V = mocapPosition(2,i);
@@ -61,3 +61,12 @@ for i=1:N
 end
 
 return
+imOne = imread("im1corrected.jpg");
+imTwo = imread("im2corrected.jpg");
+impixel(imTwo)
+imshow(imOne);
+axis on;
+hold on;
+
+%Plots locations of mocap data onto image 1
+plot(CamOneCoord(1,:),CamOneCoord(2,:),'r+','MarkerSize',10);
